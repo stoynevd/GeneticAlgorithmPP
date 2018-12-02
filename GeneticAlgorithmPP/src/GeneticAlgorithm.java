@@ -106,9 +106,13 @@ public class GeneticAlgorithm {
 
 		for (int x = NUMBER_OF_ELITE_ROUTES; x < population.getSupermarkets().size(); x++) {
 
-			Supermarket supermarket1 = selectTournamentPopulations(population).getSupermarkets().get(0);
-
-			Supermarket supermarket2 = selectTournamentPopulations(population).getSupermarkets().get(0);
+//			Supermarket supermarket1 = selectTournamentPopulations(population).getSupermarkets().get(0);
+//
+//			Supermarket supermarket2 = selectTournamentPopulations(population).getSupermarkets().get(0);
+			
+			Supermarket supermarket1 = roulette(population);
+					
+			Supermarket supermarket2 = roulette(population);		
 
 			crossoverPopulation.getSupermarkets().set(x, crossoverSupermarketPrices(supermarket1, supermarket2));
 
@@ -210,6 +214,41 @@ public class GeneticAlgorithm {
 
 		});
 
+	}
+
+	public Supermarket roulette(Population population) {
+
+		double sum = 0.0;
+
+		Supermarket r1 = population.getSupermarkets().get(0);
+
+		for (int i = 0; i < population.getSupermarkets().size(); i++) {
+
+			sum += PricingProblem.courseworkInstance().evaluate(population.getSupermarkets().get(i).getPrices());
+
+		}
+
+		double r = 0.0 + new Random().nextDouble() * (sum - 0.0);
+		
+		sum = 0.0;
+
+		for (int i = 0; i < population.getSupermarkets().size(); i++) {
+
+			if (sum > r) {
+
+				r1 = population.getSupermarkets().get(i);
+
+				break;
+
+			} else {
+
+				sum += PricingProblem.courseworkInstance().evaluate(population.getSupermarkets().get(i).getPrices());
+
+			}
+
+		}
+
+		return r1;
 	}
 
 }

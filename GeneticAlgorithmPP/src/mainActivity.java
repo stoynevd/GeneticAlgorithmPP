@@ -8,8 +8,9 @@ public class mainActivity {
 		
 //		ga.crossoverSupermarketPrices(population.getSupermarkets().get(0), population.getSupermarkets().get(1));
 
-		ga.performGA(new Population(GeneticAlgorithm.NUMBER_OF_GOODS, GeneticAlgorithm.NUMBER_OF_SUPERMARKETS));
+//		ga.performGA(new Population(GeneticAlgorithm.NUMBER_OF_GOODS, GeneticAlgorithm.NUMBER_OF_SUPERMARKETS));
 
+		ga.roulette(new Population(GeneticAlgorithm.NUMBER_OF_GOODS, GeneticAlgorithm.NUMBER_OF_SUPERMARKETS));
 		
 	}
 
